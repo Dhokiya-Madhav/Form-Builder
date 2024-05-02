@@ -10,24 +10,22 @@ import Canvas from './pages/Canvas';
 function App() {
   return (
     <BrowserRouter>
-      <div className="flex">
-        <DndProvider backend={HTML5Backend}>
+      <DndProvider backend={HTML5Backend}>
+        <div className="flex">
           <Sidebar />
-        </DndProvider>
-        <div className="flex-1">
-          <Navbar />
-          <div className="flex">
-            {/* Main Content */}
-            <div className="flex-1">
-              <Routes>
-                {/* Define your routes here */}
-                <Route path="/canvas" element={<DndProvider backend={HTML5Backend}><Canvas /></DndProvider>} />
-              </Routes>
+          <div className="flex-1">
+            <Navbar />
+            <div className="flex">
+              {/* Main Content */}
+              <div className="flex-1">
+                <Routes>
+                  <Route path="/canvas" element={<Canvas />} />
+                </Routes>
+              </div>
             </div>
-            {/* Right Sidebar */}
           </div>
         </div>
-      </div>
+      </DndProvider>
     </BrowserRouter>
   );
 }

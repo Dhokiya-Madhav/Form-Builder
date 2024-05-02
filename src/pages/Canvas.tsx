@@ -77,12 +77,41 @@ const Canvas = () => {
         return highestId + 1;
     };
 
+    const generateReactCode = () => {
+        let formCode = '<form className="w-full max-w-md mx-auto">\n';
+        droppedItems.forEach(item => {
+            switch (item.type) {
+                case 'text-field':
+                    formCode += `  <div><Input placeholder="${placeHolder.get(item.id) || 'Enter Text'}" /></div>\n`;
+                    break;
+                case 'button':
+                    formCode += `  <div><Button type='button'>${buttonText.get(item.id) || "Button"}</Button></div>\n`;
+                    break;
+                default:
+                    break;
+            }
+        });
+        formCode += '</form>';
+        return formCode;
+    };
+
+    const copyToClipboard = () => {
+        const formCode = generateReactCode();
+        navigator.clipboard.writeText(formCode).then(() => {
+            alert('Code copied to clipboard!');
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    };
 
     return (
         <div className="flex">
             <div ref={drop} className="bg-gray-500 p-4 flex-grow">
                 {/* Render form container */}
                 <form className="w-full max-w-md mx-auto">
+                    <div className="mb-4 text-center">
+                        <Button onClick={copyToClipboard} type='button'>Copy Code</Button>
+                    </div>
                     {droppedItems.map((item, index) => (
                         <div key={item.id} className="mb-4" onClick={() => handleItemClick(item)}> {/* Add onClick handler to each dropped item */}
                             {/* Render dropped item based on its type */}
@@ -109,6 +138,7 @@ const Canvas = () => {
             </div>
             <div className="w-64 bg-gray-800 text-white">
                 <RightSidebar selectedItemProperties={selectedItemProperties} onPlaceholderChange={(itemId, value) => HandlePlaceHolder(itemId, value)} onButtonTextChange={ (itemId,value)=> ButtonTextChange(itemId,value)} />
+                
             </div>
         </div>
     )

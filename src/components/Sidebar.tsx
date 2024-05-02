@@ -2,10 +2,6 @@ import { useState } from 'react';
 import { useDrag } from 'react-dnd';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { Checkbox } from './ui/checkbox';
-import { DropdownMenu } from './ui/dropdown-menu';
-import { RadioGroup, RadioGroupItem } from './ui/radio-group';
-import { Label } from '@radix-ui/react-dropdown-menu';
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -27,22 +23,6 @@ const Sidebar = () => {
         item: { type: 'button' },
         collect: (monitor) => ({
             isDraggingButton: !!monitor.isDragging(),
-        }),
-    });
-
-    const [{ isDraggingCheckBox }, dragCheckBox] = useDrag({
-        type: 'checkbox',
-        item: { type: 'checkbox' },
-        collect: (monitor) => ({
-            isDraggingCheckBox: !!monitor.isDragging(),
-        }),
-    });
-
-    const [{ isDraggingRadio }, dragRadio] = useDrag({
-        type: 'radio',
-        item: { type: 'radio' },
-        collect: (monitor) => ({
-            isDraggingRadio: !!monitor.isDragging(),
         }),
     });
 
@@ -77,29 +57,6 @@ const Sidebar = () => {
                             <Button>Button</Button>
                         </div>
                     </li>
-                   
-                    <li className={`px-4 py-2 hover:bg-blue-600 cursor-pointer ${isDraggingCheckBox ? 'opacity-50' : ''}`}>
-                        <div ref={dragCheckBox}>
-                            <div className="items-top flex space-x-2">
-                                <Checkbox id="terms1" />
-                                <div className="grid gap-1.5 leading-none">
-                                    <label htmlFor="terms1" className="text-sm font-medium leading-none peer-disabled:opacity-70" >
-                                        Checkbox
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    
-                    <li className={`px-4 py-2 hover:bg-blue-600 cursor-pointer ${isDraggingRadio ? 'opacity-50' : ''}`}>
-                        <div ref={dragRadio}>
-                            <RadioGroup defaultValue="comfortable">
-                                <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="default" id="r1" /> <div>Radio Button</div>
-                                </div>
-                            </RadioGroup>
-                        </div>
-                    </li> 
                 </ul>
             </nav>
         </div>

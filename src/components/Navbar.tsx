@@ -17,7 +17,7 @@ function Navbar() {
                     <div id="navbar-dark" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
                         <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
                             <div className="text-xl text-white">Dashboard</div>
-                            <button className="text-white bg-blue-800 p-2 rounded hover:bg-blue-600">New Form</button>
+                            <Link to='/canvas'><button className="text-white bg-blue-800 p-2 rounded hover:bg-blue-600">New Form</button></Link>
                         </div>
                     </div>
                 </nav>
